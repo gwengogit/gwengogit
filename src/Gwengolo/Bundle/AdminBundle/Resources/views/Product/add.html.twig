@@ -1,0 +1,96 @@
+{% extends "GwengoloAdminBundle::template.html.twig" %}
+
+{% block body_id %}
+  id="add_product_page"
+{% endblock %}
+{% block headerBreadCrumb %}
+  <h1>
+            Ajouter un produit
+           
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Produit</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Ajout</a></li>
+            
+          </ol>
+{% endblock %}
+
+{% block mainContent %}
+	<form id="add_product_form" role="form" method="POST" action="">
+    <div class="col-md-6">
+      
+          
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Informations générales</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  {{ form_label(form.name) }}<br>
+                  {{ form_widget(form.name) }}<br>
+
+                  {{ form_label(form.type) }}<br>
+                  {{ form_widget(form.type) }}<br>
+
+                  {{ form_label(form.collection) }}<br>
+                  {{ form_widget(form.collection) }}<br>
+
+                  {{ form_label(form.color) }}<br>
+                  {{ form_widget(form.color) }}<br>
+                  {{ form_label(form.price) }}<br>
+                  {{ form_widget(form.price) }}<br>
+                  
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            
+      
+    </div>
+    <div class="col-md-6">
+      
+          
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Informations techniques</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  {{ form_widget(form.specificities) }}<br>           
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            
+      
+    </div>
+    <div class="col-md-12">
+      
+          
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Description</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  {{ form_widget(form.description) }}<br>
+                  {{ form_widget(form.save) }}
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            
+      
+    </div>
+
+      
+    
+
+ 	</form>
+{% endblock %}
+
+{% block customJs %}
+	$(function(){
+    $('.content').css('min-height', '950px');
+    $("#add_product_form input, #add_product_form select").addClass('form-control');
+    $('#addProduct_specificities input').removeClass('form-control');
+		CKEDITOR.replace( 'addProduct_description' );
+    
+	});
+{% endblock %}
+
+{% block checkbox_widget %}
+
+{% endblock checkbox_widget %}

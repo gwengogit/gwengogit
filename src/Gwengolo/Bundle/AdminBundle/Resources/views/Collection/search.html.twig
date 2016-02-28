@@ -1,0 +1,36 @@
+{% extends "GwengoloAdminBundle::template.html.twig" %}
+
+{% block headerBreadCrumb %}
+  <h1>
+           Gérer les collections
+           
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Collection</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Gestion</a></li>
+            
+          </ol>
+{% endblock %}
+
+{% block mainContent %}
+  			<table class="table table-hover" style="background-color:white;">
+                    <tbody><tr>
+                      <th>ID</th>
+                      <th>Nom</th>
+                      <th>Actions</th>
+                    </tr>
+                    {% for collection in collections %}
+                    <tr>
+                      <td>{{ collection.id }}</td>
+                      <td>{{ collection.name }}</td>
+                      <td>
+                      <a href="{{ path('gwengolo_admin_collection_edit', {'id': collection.id}) }}">Modifier</a>
+                      <a href="{{ path('gwengolo_admin_collection_delete', {'id': collection.id}) }}">Supprimer</a><br>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                  </table>
+{% endblock %}

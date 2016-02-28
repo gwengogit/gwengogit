@@ -1,0 +1,18 @@
+gwengolo_front:
+    resource: "@GwengoloFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gwengolo_admin:
+    resource: "@GwengoloAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gwengolo_product:
+    resource: "@GwengoloProductBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

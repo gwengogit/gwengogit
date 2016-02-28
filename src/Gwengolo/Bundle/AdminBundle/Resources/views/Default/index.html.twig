@@ -1,0 +1,16 @@
+{% extends "GwengoloAdminBundle::template.html.twig" %}
+
+{% block headerBreadCrumb %}
+  <h1>
+            HomePage
+            <small>probablement le dashboard</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            
+          </ol>
+{% endblock %}
+
+{% block mainContent %}
+  Page d'accueil de {{ app.security.token.user.username }}
+{% endblock %}

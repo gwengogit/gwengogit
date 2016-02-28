@@ -1,0 +1,31 @@
+{% extends "GwengoloAdminBundle::template.html.twig" %}
+{% block headerBreadCrumb %}
+<h1>Emails (newsletter) </h1>
+
+<ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Emails (newsletter) </a></li>
+            
+          </ol>
+{% endblock %}
+
+{% block mainContent %}
+<table class="table table-hover" style="background-color:white;">
+                    <tbody><tr>
+                      <th>ID</th>
+                      <th>Nom</th>
+                      <th>Email</th>
+                      <th>Date et heure d'enregistrement</th>
+                    </tr>
+                    {% for email in emails %}
+                      <tr>
+                        <td>{{ email.id }}</td>
+                        <td>{{ email.name }}</td>
+                        <td>{{ email.email }}</td>
+                        <td>{{ email.recorded | date('d-m-Y, G:i:s')}}</td>
+                      </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                  </table>
+{% endblock %}

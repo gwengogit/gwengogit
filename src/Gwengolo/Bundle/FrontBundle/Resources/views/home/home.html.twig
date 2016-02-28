@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Gwengolo</title>
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <script src="{{ asset('assets/js/jquery.js') }}"></script>
+  <script src="{{ asset('assets/js/gmap.js') }}"></script>
+  <script src="{{ asset('assets/js/cycle.js') }}"></script>
+  <script src="{{ asset('assets/js/script.js') }}"></script>
+</head>
+<body>
+		<div id="header">
+			<img src="{{ asset('assets/img/slider/4.jpg') }}" width="100%" height="130%">
+			<img src="{{ asset('assets/img/slider/2.resized.jpg') }}" width="100%" height="140%">
+			<img src="{{ asset('assets/img/slider/3.jpg') }}" width="100%" height="140%">
+			<img src="{{ asset('assets/img/slider/1.jpg') }}" width="100%" height="140%">
+		</div>
+		<div id="header-top-area">
+			<ul>
+				<li><a href="{{ path('gwengolo_collection_list') }}">La collection</a></li>
+				<li><a href="{{ path('gwengolo_brand') }}">La marque</a></li>
+				<li class="gwen-title"><a href="{{ path('gwengolo_homepage') }}">Gwengolo</a></li>
+				<li><a href="{{ path('gwengolo_findus') }}">Où nous trouver</a></li>
+				<li><a href="{{ path('gwengolo_contact') }}">Contact</a></li>
+			</ul>
+		</div>
+		<div id="home-slider-right">
+		<img src="{{ asset('assets/img/slider-droite.png') }}"/>
+		</div>
+		<div id="home-slider-left">
+		<img src="{{ asset('assets/img/slider-gauche.png') }}"/>
+		</div>
+		<div id="home-slider-text">
+			<p>Pie pudding tart bear claw caramels. Marshmallow cookie sweet roll bear claw jelly beans powder caramels bonbon applicake. Jelly chocolate cake icing lollipop wafer macaroon candy canes cupcake.</p>
+			 <a href="http://www.google.com">Découvrir la turbulette</a>
+		</div>
+		<div id="slider-pagination-band">
+			<div id="slider-pagination-container">
+				<ul>
+					<li>1 |</li>
+					<li>2 |</li>
+					<li>3 |</li>
+					<li>4</li>
+				</ul>
+			</div>
+		</div>
+
+	<div id="main-content" class="main-divs-padding">
+
+		<div id="home-left-col">	
+			<div id="home-left-col-content">
+				<h1 class="main-content-title">Nos dernières créations</h1>
+				{% for product in firstLine %}
+				<a href="{{ path('gwengolo_product', {'productSlug': product.slug }) }}">
+				<div class="gallery-item {%if loop.index > 1 %}left-marg{%endif%}" style="background-color:{{ product.color.code }};">
+					<div class="gallery-item-content" style="background-image:url('{{ asset('products_img/' ~ product.id ~ '/main/' ~ product.mainImage.name) | imagine_filter('small_product_pic') }}' );">
+						<div class="gallery-item-hidden-detail" style="background-color:{{ product.color.code }};">
+							<br><br>
+				    			{{ product.name }}<br>
+				    			A partir de {{ product.price }}€
+						</div>
+					</div>
+				</div>
+			</a>
+				{% endfor %}
+
+				<br>
+				{% for product in firstLine %}
+				<div class="gallery-item-title {%if loop.index > 1 %}left-marg{% endif %}">{{ product.name }}</div>
+				{% endfor %}
+
+				{% for product in secondLine %}
+				<a href="{{ path('gwengolo_product', {'productSlug': product.slug }) }}">
+				<div class="gallery-item {%if loop.index > 1 %}left-marg{%endif%}" style="background-color:{{ product.color.code }};">
+					<div class="gallery-item-content" style="background-image:url('{{ asset('products_img/' ~ product.id ~ '/main/' ~ product.mainImage.name) | imagine_filter('small_product_pic') }}' );">
+						<div class="gallery-item-hidden-detail" style="background-color:{{ product.color.code }};">
+							<br><br>
+				    			{{ product.name }}<br>
+				    			A partir de {{ product.price }}€
+						</div>
+					</div>
+				</div>
+				</a>
+				{% endfor %}
+
+				<br>
+				{% for product in secondLine %}
+				<div class="gallery-item-title {%if loop.index > 1 %}left-marg{% endif %}">{{ product.name }}</div>
+				{% endfor %}
+				
+				
+				<a href="{{ path('gwengolo_collection_list') }}"><div id="lien-toute-collection">VOIR TOUTE LA COLLECTION&nbsp;&nbsp;<img src="{{ asset('assets/img/fleche-rose.png') }}" /></div></a>
+			</div>
+
+			<div id="home-left-col-separator">
+
+			</div>
+
+		</div>
+		<div id="home-right-col"> 
+			<h1 class="main-content-title">Où nous trouver?</h1>
+			<div id="home-map"></div>
+			<div id="home-col-left-contact-info">
+				6 rue Etienne Peroux<br>
+				78600 Maisons-Laffitte<br><br>
+				Télephone: 06 85 28 63 08<br>
+				Email: morgane@gwengolo.<br><br>
+				NOUS ECRIRE (img)
+			</div>
+		</div>
+
+	</div>
+	<div id="engagement">
+		<h1>Nos engagements</h1>
+		<ul>
+			<li>Emballage cadeau</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"> </li>
+			<li>Livraison gratuite</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>Satisfait ou remboursé</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>Sur mesure</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>Fait main</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>100% de personnes satisfaites</li>
+		</ul>
+	</div>
+	<div id="abonnement">
+		<div id="abo-formulaire">
+			<h1>S'abonner pour recevoir nos dernières nouveautés</h1>
+			<input id="abo-name-field" type="text" placeholder="Nom" name="abo-nom"> <input id="abo-adresse-field" placeholder="Adresse" type="text" name="abo-adresse">
+			<div id="abo-home-form-button" class="no-select"><img class="envoyer-icone" src="{{ asset('assets/img/envoyer-blanc.png') }}"/> <p>S'inscrire</p></div>
+		</div>
+	<!--	<div id="abo-reseaux">
+			<h1>Retrouvez nous</h1>
+			<img id="home-abo-facebook-icon" src="{{ asset('assets/img/facebook.png') }}"/><img id="home-abo-twitter-icon" src="{{ asset('assets/img/twitter.png') }}" />
+		</div> -->
+	</div>
+	<div id="footer">
+		<div id="footer-container">
+			<div id="home-footer-leftcol">
+				<h1>Plan du site</h1>
+					Gwengolo<br>
+					La collection<br>
+					La marque<br>
+					Où nous trouver<br>
+					Contact
+			</div>
+			<div id="home-footer-secondcol">
+				<h1>Modalités</h1>
+					Retour et échanges<br>
+					Guide des tailles<br>
+					Livraison<br>
+					A propos de la marque<br>
+					Confidentialité
+			</div>
+			<div id="home-footer-rightcol">
+				<h1>©2014 Gwengolo, marque déposée</h1>
+			</div>
+	</div>
+</body>
+</html>
+
+<script>
+$(function(){
+	function validateEmail(email) {
+	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	    return re.test(email);
+	}
+
+	function sendNewsletterData(name, email)
+	{
+		$.post( "{{ path('gwengolo_record_email') }}", { name: name, email: email })
+          .done(function( data ) {
+            alert(data);
+        });
+	}
+
+	$('#abo-home-form-button').click(function(){
+		if($('#abo-name-field').val() != '' && $('#abo-adresse-field').val() != '') {
+			if(validateEmail($('#abo-adresse-field').val())) {
+				sendNewsletterData($('#abo-name-field').val(), $('#abo-adresse-field').val());
+			} else {
+				alert("L'adresse email que vous avez renseigné n'est pas une adresse email valide.");
+			}
+		} else {
+			alert('Veuilles remplir les deux champs pour valider votre inscription à la newsletter.');
+		}
+	});
+
+
+});
+</script>

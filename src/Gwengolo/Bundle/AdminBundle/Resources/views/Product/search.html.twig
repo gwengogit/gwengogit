@@ -1,0 +1,73 @@
+{% extends "GwengoloAdminBundle::template.html.twig" %}
+
+{% block headerBreadCrumb %}
+  <h1>
+            Gérer les produits
+           
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Produit</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Gestion</a></li>
+            
+          </ol>
+{% endblock %}
+
+{% block mainContent %}
+
+{{ grid(grid, _self) }}
+
+{% endblock %}
+
+{% block grid_filters %}
+<div class="row grid-filter">
+        <div class="col-xs-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title"><a  href=".collapseFilter" data-toggle="collapse" aria-controls="collapseGrid">Recherche d'un produit</a></h3>
+                </div>
+                <form>
+                <div class="box-body collapse collapseFilter">
+                    {%- for column in grid.columns %}
+                        {%- if column.filterable and column.type != 'actions' and column.type != 'massaction' %}
+                            <div class="form-group">
+                                {% if (grid.prefixTitle ~ column.title ~ '__abbr') | trans != grid.prefixTitle ~ column.title ~ '__abbr' %}
+                                    {% set columnTitle = grid.prefixTitle ~ column.title ~ '__abbr' %}
+                                {% elseif (grid.prefixTitle ~ column.title) | trans != grid.prefixTitle ~ column.title %}
+                                    {% set columnTitle = grid.prefixTitle ~ column.title %}
+                                {% else %}
+                                    {% set columnTitle = column.title %}
+                                {% endif %}
+
+                                <label for="{{ grid.hash }}__{{ column.id }}__val">{{ columnTitle | trans }}</label>
+                                {{ grid_filter(column, grid, false)|raw }}
+                            </div>
+                        {%- endif %}
+                    {%- endfor %}
+                </div>
+
+                <div class="box-footer collapse collapseFilter"">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <button class="btn btn-primary search_activity_button" type="submit"
+                                    title="{{ 'wording.action.filter' | trans }}">Filtrer</button>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <a class="col-sm-push-9  search_activity_button"
+                               href="?{{ grid.hash }}[_reset]=">Annuler</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block customJs %}
+	$(function(){
+		$('table').addClass('table table-hover search-result-table');
+        $('input, select').addClass('form-control');
+	});
+{% endblock %}

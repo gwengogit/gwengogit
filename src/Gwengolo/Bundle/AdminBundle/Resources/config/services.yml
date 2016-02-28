@@ -1,0 +1,10 @@
+services:
+    gwengolo_admin.product_manager:
+        class: Gwengolo\Bundle\AdminBundle\Manager\ProductManager
+        arguments:
+            entityManager: "@doctrine.orm.entity_manager"
+    gwengolo_admin.product_search_grid:
+        class: Gwengolo\Bundle\AdminBundle\Grid\ProductSearchGrid
+        parent: Grid
+        public: true
+

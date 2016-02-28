@@ -1,0 +1,11 @@
+#add-collection-form input{
+	width:50%;
+}
+
+table.search-result-table{
+	background-color:white;
+}
+
+table.search-result-table ul{
+	list-style-type:none;
+}

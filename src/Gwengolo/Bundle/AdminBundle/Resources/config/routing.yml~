@@ -1,0 +1,40 @@
+gwengolo_admin_homepage:
+    path:     /admin/
+    defaults: { _controller: GwengoloAdminBundle:Default:index }
+
+gwengolo_admin_collection_search:
+    path:     /admin/collection/search
+    defaults: { _controller: GwengoloAdminBundle:Collection:search }
+
+gwengolo_admin_collection_add:
+    path:     /admin/collection/add
+    defaults: { _controller: GwengoloAdminBundle:Collection:add }
+
+gwengolo_admin_collection_edit:
+    path:     /admin/collection/edit/{id}
+    defaults: { _controller: GwengoloAdminBundle:Collection:edit }
+
+gwengolo_admin_collection_delete:
+    path:     /admin/collection/delete/{id}
+    defaults: { _controller: GwengoloAdminBundle:Collection:delete }
+
+gwengolo_admin_product_search:
+    path:     /admin/product/search
+    defaults: { _controller: GwengoloAdminBundle:Product:search }
+
+gwengolo_admin_product_add:
+    path:     /admin/product/add
+    defaults: { _controller: GwengoloAdminBundle:Product:add }
+
+gwengolo_admin_product_edit:
+    path:     /admin/product/edit/{id}
+    defaults: { _controller: GwengoloAdminBundle:Product:edit }
+
+gwengolo_admin_product_delete:
+    path:     /admin/product/delete/{id}
+    defaults: { _controller: GwengoloAdminBundle:Product:delete }
+
+gwengolo_admin_type_search:
+    path:     /admin/type/search
+    defaults: { _controller: GwengoloAdminBundle:Type:search }
+

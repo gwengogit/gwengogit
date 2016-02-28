@@ -1,0 +1,5 @@
+services:
+    gwengolo_product.cookie_manager:
+        class: Gwengolo\Bundle\ProductBundle\Manager\CookieManager
+        arguments:
+            entityManager: "@doctrine.orm.entity_manager"

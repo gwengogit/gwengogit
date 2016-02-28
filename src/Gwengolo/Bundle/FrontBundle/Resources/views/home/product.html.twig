@@ -1,0 +1,227 @@
+{% extends "GwengoloFrontBundle:home:base.html.twig" %}
+
+	{% block maincontent %}
+	<style>
+	#same-product-pictures .same-product-container{
+		background-color:{{ product.color.code }};
+	}
+	</style>
+		
+		<div id="produit-fil-ariane">
+				<span id="product-ariane-container"><a href="{{ path('gwengolo_collection_content', {'slug': product.collection.slug}) }}">{{ product.collection.name }}</a> &nbsp;&nbsp;<img src="{{ asset('assets/img/fil-ariane.png') }}"/>&nbsp;&nbsp;{{ product.name }}</span> 
+			</div>
+			<div id="same-cat-products-title-div">
+				<span class="title">PRODUITS DE LA MEME CATEGORIE</span>
+				<span class="action">
+					<span class="previous-product"><img class="reversed-image" src="{{ asset('assets/img/fleche-bleue.png') }}"> Produit précèdent</span> |  
+					<span class="next-product">Produit suivant <img src="{{ asset('assets/img/fleche-bleue.png') }}"></img></span>
+				</span>
+			</div>
+			<div id="same-cat-products">
+			{% for product in sameCatProducts %}
+	<a href="{{ path('gwengolo_product', {'productSlug': product.slug }) }}" {% if product.id == productId %} class="current-product-link" {% endif %}>
+				<div class="same-cat-product-container" style="background-color:{{ product.color.code }}">
+					<div class="same-cat-content" style="background-image:url('{{ asset('products_img/' ~ product.id ~ '/main/' ~ product.mainImage.name) | imagine_filter('small_product_pic') }}' );">
+
+					</div>
+					{% if product.id != productId %}
+					<div class="dark-layer">
+
+					</div>
+					{% endif %}
+				</div>
+	</a>
+			{% endfor %}
+			</div>
+			<div id="product-main-content">
+				<div id="product-left-col">
+					<div id="product-main-view" {%if product.type.name == 'Turbulette' %} style="width:70%;height:690px;"{%endif%}>
+
+		<img style="width:100%;height:100%;object-fit:cover;" src="{{ asset('products_img/'~ product.id ~'/main/' ~ product.mainImage.name) | imagine_filter('big_product_pic') }}">
+					
+					</div>
+					<span class="link-survoler">Survoler l'image pour agrandir {{product.type.name}}</span>
+					<div id="same-product-pictures">
+					{% for image in product.images %}
+						<div class="same-product-container">
+							<div class="same-product-content">
+							<img src="{{ asset('products_img/' ~ product.id ~ '/others/' ~ image.name) | imagine_filter('small_product_pic') }}" width="94px" height="94px"
+								data-big="{{ asset('products_img/' ~ product.id ~ '/others/' ~ image.name) | imagine_filter('big_product_pic') }}"
+							/> 
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+
+				</div>
+				<div id="product-right-col">
+					<span id="product-page-title">{{ product.name }}</span><br>
+					<span id="product-page-price">{{ product.price }} €<a id="how-to-buy">Comment acheter ?</a></span><br><br>
+					<hr>
+					<div id="product-desc-toggle">
+						<div id="product-desc-toggle-first">
+							<div class="product-page-desc">
+								{{ product.description | raw }}
+							
+								<p id="product-more-detail"><img src="{{ asset('assets/img/plus-detail.png') }}"> &nbsp;&nbsp;<a href="#">Plus de détails</a></p>
+							</div>
+							<div id="product-page-more-div" class="hidden">
+								<hr>
+								<p class="product-page-desc"><img src="{{ asset('assets/img/serie-limite.png') }}"/></img> Lavage en machine</p>
+								<hr>
+								<p class="product-page-desc"><img src="{{ asset('assets/img/serie-limite.png') }}"/></img> Lavage en machine</p>
+								<hr>
+								<p class="product-page-desc"><img src="{{ asset('assets/img/serie-limite.png') }}"/></img> Lavage en machine</p>
+								<hr>
+								<p class="product-page-desc"><img src="{{ asset('assets/img/serie-limite.png') }}"/></img> Lavage en machine</p>
+							</div>
+						</div>
+						<div id="product-desc-toggle-second" class="hidden">
+							Pour commander un produit, envoyez nous simplement un message avec la référence de votre produit et nous vous 
+							recontacterons pour poursuivre votre achat et vous envoyer le produit à domicile.<br><br>
+
+							<form id="contact-page-form">
+								<input id="contact-form-name" placeholder="Nom" name="contact-form-nom" type="text"> 
+								<input id="contact-form-telephone" placeholder="Téléphone" name="contact-form-telephone" type="text">
+								<input id="contact-form-email" placeholder="Email" name="contact-form-email" type="text">
+								<textarea id="contact-form-message" placeholder="Votre message..."></textarea>
+								<div id="contact-form-validate" class="no-select product-form-send-btn"><img class="envoyer-icone" src="{{ asset('assets/img/envoyer-bleu.png') }}"/> <p>S'inscrire</p></div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			{%if lastSeenProducts|length > 0 %}
+			<div id="lately-consulted-product">
+				<div id="lately-consulted-product-content">
+					<h1 class="main-content-title">Produits recemment consultés</h1>
+					<div class="products-band-product-list">
+						{% for product in lastSeenProducts %}
+					<a href="{{ path('gwengolo_product', {'productSlug': product.slug }) }}">
+					    <div class="product-list-container">
+					    	<div class="product-list-background" style="background-color:{{ product.color.code }};">
+					    		<div class="hidden-product-price">
+					    			<br><br>
+				    			{{ product.name }}&nbsp;&nbsp;<br>
+				    			A partir de {{ product.price }}€&nbsp;&nbsp;
+					    		</div>
+					    		<img src="{{ asset('products_img/' ~ product.id ~ '/main/' ~ product.mainImage.name) | imagine_filter('small_product_pic') }}"/>
+					    	</div>
+					    	<span>{{product.name}}</span>
+					    </div>
+				    </a>
+				    {% endfor %}
+				    
+				</div>
+				</div>
+			</div>
+			{%endif%}
+	{% endblock %}
+	{% block beforefooter %}
+	<div id="engagement">
+		<h1>Nos engagements</h1>
+		<ul>
+			<li>Emballage cadeau</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"> </li>
+			<li>Livraison gratuite</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>Satisfait ou remboursé</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>Sur mesure</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>Fait main</li>
+			<li><img src="{{ asset('assets/img/etoiles.png') }}"></li>
+			<li>100% de personnes satisfaites</li>
+		</ul>
+	</div>
+
+	<script src="{{ asset('assets/js/zoom.js') }}"></script>
+	<script>
+				$(function(){
+					$('#product-main-view img').imageLens({lensSize:240});
+					
+
+					$('#product-more-detail').on('click', function(evenement){
+						evenement.stopPropagation;
+						if($('#product-page-more-div').hasClass('hidden'))
+						{
+							$("#product-page-more-div").show(500, 'swing').removeClass('hidden', 'swing').addClass('shown');
+						}else{
+							$("#product-page-more-div").hide(500, 'swing').removeClass('shown', 'swing').addClass('hidden');
+						}
+						return false;
+					});
+
+
+					$('.previous-product').click(function(){
+						previousHref = $('.current-product-link').prev().attr('href');
+						if(previousHref != undefined) {
+							window.location = previousHref;
+						}
+						
+					});
+					$('.next-product').click(function(){
+						if($('.current-product-link').next().attr('href') != undefined) {
+							window.location = $('.current-product-link').next().attr('href');
+						}
+						
+					});
+
+					$('#how-to-buy').click(function(){
+						if($('#product-desc-toggle-first').hasClass('hidden')) {
+							$('#product-desc-toggle-first').removeClass('hidden');
+							$('#product-desc-toggle-second').addClass('hidden');
+						} else {
+							$('#product-desc-toggle-first').addClass('hidden');
+							$('#product-desc-toggle-second').removeClass('hidden');
+						}
+					});
+
+					$('#contact-form-validate').click(function(){
+						sendMailMessage();
+					});
+
+					function sendMailMessage()
+					{
+						if($('#contact-form-name').val() == '' 
+							|| $('#contact-form-telephone').val() == ''
+							|| $('#contact-form-email').val() == '' 
+							|| $('#contact-form-message').val() == '') {
+							alert('Veuillez remplir tous les champs.');
+						} else {
+							$.post( "{{ path('gwengolo_send_message') }}", 
+							{ 	name: $('#contact-form-name').val(), 
+								telephone: $('#contact-form-telephone').val(),
+								email: $('#contact-form-email').val(),
+								message: $('#contact-form-message').val()
+							})
+						      .done(function( data ) {
+						        alert(data);
+						    });
+						}
+					}
+
+					$('.products-band-product-list a').mouseover(function(e){
+						e.stopPropagation();
+						$(this).children('.product-list-container').children('.product-list-background').children('.hidden-product-price').show();
+					});
+					$('.products-band-product-list a').mouseout(function(e){
+						e.stopPropagation();
+						$(this).children('.product-list-container').children('.product-list-background').children('.hidden-product-price').hide();
+					});
+
+					$('.same-product-content').click(function(){
+						srcElement = $(this).children('img').attr('data-big');
+						$('#product-main-view img').remove();
+						var img = $('<img id="dynamic">');
+						img.attr('src', srcElement);
+						img.attr('style', 'width:100%;height:100%;');
+						img.hide().appendTo('#product-main-view').fadeIn();
+						$('#product-main-view img').imageLens({lensSize:240});
+
+					});
+
+				});
+			</script>
+	{% endblock %}
+			

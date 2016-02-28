@@ -1,0 +1,96 @@
+{% extends "GwengoloAdminBundle::template.html.twig" %}
+
+{% block headerBreadCrumb %}
+
+  <h1>
+          Gestion des images de: <b>{{ product.name }}</b>
+           
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Image</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Ajout</a></li>
+            
+          </ol>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="col-md-6">
+	<div id="add-collection-form" class="box box-primary">
+                <div class="box-header">
+                  <h3 class="box-title">Upload de l'image principale</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                  <form role="form" method="POST" action="{{ path('gwengolo_admin_image_upload_main', {'id': product.id} ) }}" {{ form_enctype(form) }}>
+                  <div class="box-body">
+                    <div class="form-group" style="height:125px">
+                    	{{ form_label(form.image) }}<br>
+                      {{ form_widget(form.image) }}
+                    </div>
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    {{ form_widget(form.save) }}
+                  </div>
+                </form>
+    </div> 
+    </div>
+    <div class="col-md-6">
+        <div id="add-collection-form" class="box box-primary" style="text-align:center;">
+        <div class="box-header">
+                  <h3 class="box-title">Image principale</h3>
+                </div>
+          {% if main_image %}
+            <img style="height:200px;margin:auto;margin-bottom:15px;" src="{{ asset('products_img/' ~ product.id ~ '/main/' ~ main_image.name) | imagine_filter('big_product_pic') }}"/>
+          {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-12">
+    <div id="add-collection-form" class="box box-primary">
+                <div class="box-header">
+                  <h3 class="box-title">Upload des images supplémentaires</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                  <form role="form" method="POST" action="{{ path('gwengolo_admin_image_upload_others', {'id': product.id} ) }}" {{ form_enctype(formOthers) }}>
+                  <div class="box-body">
+                    <div class="form-group">
+                      {{ form_label(formOthers.image) }}<br>
+                      {{ form_widget(formOthers.image) }}
+                    </div>
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    {{ form_widget(formOthers.save) }}
+                  </div>
+                </form>
+    </div> 
+    </div>
+    <div class="col-md-12">
+        <div id="add-collection-form" class="box box-primary others">
+        <div class="box-header">
+                  <h3 class="box-title">Images supplémentaires</h3>
+                </div>
+          {% if other_images %}
+            {% for image in other_images %}
+              <div style="width:200px; float:left;margin-bottom:15px;margin-right:5px;">
+              <img style="height:200px;width:200px;margin-bottom:0px;margin-right:10px;float:left;" src="{{ asset('products_img/' ~ product.id ~ '/others/' ~ image.name) | imagine_filter('big_product_pic') }}"/>
+              <a href="{{ path('gwengolo_admin_image_delete', {'id': image.id, 'productId': product.id} ) }}">Supprimer</a>
+              </div>
+
+            {% endfor %}  
+          {% endif %}
+        </div>
+    </div>
+                
+  
+{% endblock %}
+
+{% block customJs %}
+    
+$(function(){
+    $('.content').height('2000px');
+    $('.box.box-primary.others').height('1000px');
+});
+    
+{% endblock %}

@@ -1,0 +1,3 @@
+gwengolo_product_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GwengoloProductBundle:Default:index }

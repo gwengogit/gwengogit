@@ -1,0 +1,38 @@
+{% extends "GwengoloAdminBundle::template.html.twig" %}
+
+{% block headerBreadCrumb %}
+  <h1>
+           Gérer les spécificités
+           
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Spécificité</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Gestion</a></li>
+            
+          </ol>
+{% endblock %}
+
+{% block mainContent %}
+  			<table class="table table-hover" style="background-color:white;">
+                    <tbody><tr>
+                      <th>ID</th>
+                      <th>Nom</th>
+                      <th>Couleur</th>
+                      <th>Actions</th>
+                    </tr>
+                    {% for specificity in specificities %}
+                    <tr>
+                      <td>{{ specificity.id }}</td>
+                      <td>{{ specificity.name }}</td>
+                      <td>{{ specificity.description }}</td>
+                      <td>
+                      <a href="{{ path('gwengolo_admin_specificity_edit', {'id': specificity.id}) }}">Modifier</a>
+                      <a href="{{ path('gwengolo_admin_specificity_delete', {'id': specificity.id}) }}">Supprimer</a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                  </table>
+{% endblock %}

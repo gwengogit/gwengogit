@@ -1,0 +1,64 @@
+{% extends "GwengoloFrontBundle:home:base.html.twig" %}
+
+			{% block maincontent %}
+			<div class="products-band">
+				<div class="products-band-titles">
+					<span class="main-content-title"><a href="toto">Retour</a> <img src="{{ asset('assets/img/fil-ariane.png') }}" style="vertical-align:middle;"/> A la cour</span> 
+				</div>
+				<div class="products-band-product-list" style="height:250px;">
+				    {% for product in products %}
+					<a href="{{ path('gwengolo_product', {'productSlug': product.slug }) }}">
+					<div class="gallery-item" style="width:200px;height:200px;background-color:{{ product.color.code }};">
+				    	<div class="gallery-item-content" style="background-image:url('{{ asset('products_img/' ~ product.id ~ '/main/' ~ product.mainImage.name) | imagine_filter('small_product_pic') }}' );">
+				    		<div class="collection-over-desc" style="background-color:{{ product.color.code }};">
+				    			<br><br>
+				    			{{ product.name }}<br>
+				    			A partir de {{ product.price }}€
+				    		</div>
+				    	</div>
+				    	<span class="collection-product-name">{{ product.name }}</span>
+				    </div>
+				</a>
+					{% endfor %}
+				    
+				</div>
+
+			</div>
+<br>
+			<div class="remonter-div">
+				<img src="{{ asset('assets/img/remonter.png') }}"/>
+				<p>Remonter</p>
+
+
+			</div>
+			
+			<script>
+				$(function(){
+
+					$('#common-sub-header').css('margin-bottom', '20px');
+					$('.gallery-item').css('margin-top', '10px');
+					$('.gallery-item').each(function(){
+						$(this).height($(this).width());
+					});
+
+					$('.gallery-item-content').mouseover(function(e){
+						e.stopPropagation();
+						$(this).children().show();
+					});
+
+					$('.gallery-item-content').mouseout(function(e){
+						e.stopPropagation();
+						$(this).children().hide();
+						//$(this).children().hide();
+					});
+
+					$(".remonter-div img").click(function() {
+					    $('html, body').animate({
+					        scrollTop: $("#common-header").offset().top
+					    }, 750);
+					});
+				})
+			</script>
+			{% endblock %}
+
+			

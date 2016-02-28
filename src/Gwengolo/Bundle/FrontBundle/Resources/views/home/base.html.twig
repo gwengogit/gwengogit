@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Gwengolo</title>
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
+  <script src="{{ asset('assets/js/jquery.js') }}"></script>
+  <script src="{{ asset('assets/js/gmap.js') }}"></script>
+  <script src="{{ asset('assets/script2.js') }}"></script>
+</head>
+<body id="collection-page">
+		<div id="common-header">
+			<ul>
+				<li><a href="{{ path('gwengolo_collection_list') }}">La collection</a></li>
+				<li><a href="{{ path('gwengolo_brand') }}">La marque</a></li>
+				<li class="gwen-title"><a href="{{ path('gwengolo_homepage') }}">Gwengolo</a></li>
+				<li><a href="{{ path('gwengolo_findus') }}">Où nous trouver</a></li>
+				<li><a href="{{ path('gwengolo_contact') }}">Contact</a></li>
+			</ul>
+		</div>
+		<div id="common-sub-header">
+			<div id="common-sub-header-container">
+				
+				<div class="floatleft"><p>NEWSLETTER &nbsp;&nbsp;<img class="hidden" src="{{ asset('assets/img/envoyer-bleu.png') }}"></p></div>
+				<div class="floatright"><p id="search_text_group" >RECHERCHER &nbsp;&nbsp;<img src="{{ asset('assets/img/loupe-bleu.png') }}"></p>
+					<span id="search_field_group" class="hidden">
+						<form name="all_page_search" action="{{ path('gwengolo_search') }}" method="POST" ><input id="main_search_field" placeholder="" name="search_product_label" type="text"><img src="{{ asset('assets/img/loupe-bleu.png') }}"></form>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="main-content">
+			{% block maincontent %}
+
+			{% endblock %}
+		</div>
+		{% block beforefooter %}
+
+		{% endblock %}
+	<!--	<div id="footer">  -->
+		<div id="footer-container">
+			{% block footer %}
+				<div id="home-footer-leftcol">
+					<h1>Plan du site</h1>
+						Gwengolo<br>
+						La collection<br>
+						La marque<br>
+						Où nous trouver<br>
+						Contact
+				</div>
+				<div id="home-footer-secondcol">
+					<h1>Modalités</h1>
+						Retour et échanges<br>
+						Guide des tailles<br>
+						Livraison<br>
+						A propos de la marque<br>
+						Confidentialité
+				</div>
+				<div id="home-footer-rightcol">
+					<h1>©2014 Gwengolo, marque déposée</h1>
+				</div>
+			{% endblock %}
+	</div>
+	<!--	<div id="footer-modalite">
+			<div id="footer-modalite-content">
+
+			</div>
+		</div> -->
+		
+		
+</body>
+</html>
+
+<script>
+	$(function(){
+		$('#search_text_group').click(function(){
+			$(this).addClass('hidden');
+			$('#search_field_group').removeClass('hidden');
+			$('#main_search_field').addClass('shown');
+		});
+		$('#search_field_group img').click(function(){
+			$('#search_field_group').addClass('hidden');
+			$('#search_text_group').removeClass('hidden');
+			$('#main_search_field').removeClass('shown');
+		});
+		$('#common-sub-header-container .floatleft p').on('mouseover', function(){
+			$('#common-sub-header-container .floatleft p img').removeClass('hidden');
+		});
+		$('#common-sub-header-container .floatleft p').on('mouseout', function(){
+			$('#common-sub-header-container .floatleft p img').addClass('hidden');
+		});
+	});
+</script>

@@ -1,0 +1,23 @@
+gwengolo_homepage:
+    path:     /
+    defaults: { _controller: GwengoloFrontBundle:Default:index }
+
+gwengolo_collection_list:
+    path:     /collections
+    defaults: { _controller: GwengoloFrontBundle:Default:collections }
+
+gwengolo_contact:
+    path:     /contact
+    defaults: { _controller: GwengoloFrontBundle:Default:contact }
+
+gwengolo_contact:
+    path:     /la_marque
+    defaults: { _controller: GwengoloFrontBundle:Default:brand }
+
+gwengolo_collection_content:
+    path:     /collection/{slug}
+    defaults: { _controller: GwengoloFrontBundle:Default:collectionContent }
+
+gwengolo_product:
+    path:     /{productSlug}
+    defaults: { _controller: GwengoloFrontBundle:Default:product }
